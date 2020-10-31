@@ -14,6 +14,7 @@ import java.sql.Statement;
 /**
  * @author akirakozov
  */
+@SuppressWarnings("SqlNoDataSourceInspection")
 public class Main {
     public static void main(String[] args) throws Exception {
         try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
