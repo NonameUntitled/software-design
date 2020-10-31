@@ -14,7 +14,11 @@ public class HtmlBuilder {
     }
 
     public void addProduct(Product product) {
-        text += product.getName() + "\t" + product.getPrice() + "</br>" + System.lineSeparator();
+        text += product.name() + "\t" + product.price() + "</br>" + System.lineSeparator();
+    }
+
+    public void clear() {
+        text = "";
     }
 
     @Override
