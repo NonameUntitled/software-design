@@ -1,4 +1,4 @@
-package ru.akirakozov.sd.refactoring;
+package ru.akirakozov.sd.refactoring.database;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;

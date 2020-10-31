@@ -1,24 +1,16 @@
 package ru.akirakozov.sd.refactoring.servlet.queries;
 
-import ru.akirakozov.sd.refactoring.Product;
-import ru.akirakozov.sd.refactoring.html.HtmlBuilder;
+import ru.akirakozov.sd.refactoring.database.Product;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetMaxProductPriceQuery implements Query {
-
+public class GetMaxProductPriceQuery extends Query {
     @Override
-    public String processResultSet(ResultSet rs) {
-        HtmlBuilder htmlBuilder = new HtmlBuilder();
+    void processQuery(ResultSet rs) throws SQLException {
         htmlBuilder.addHeader("Product with max price: ");
-        try {
-            while (rs.next()) {
-                htmlBuilder.addProduct(Product.readFromResultSet(rs));
-            }
-        } catch (SQLException e) {
-            htmlBuilder.clear();
+        while (rs.next()) {
+            htmlBuilder.addProduct(Product.readFromResultSet(rs));
         }
-        return htmlBuilder.toString();
     }
 }

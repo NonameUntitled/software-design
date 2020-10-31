@@ -14,6 +14,7 @@ public class HttpUtils {
     private static final String GET_ALL_PRODUCTS_COST_SUM_REQUEST = "http://localhost:8081/query?command=sum";
     private static final String GET_PRODUCT_MIN_PRICE = "http://localhost:8081/query?command=min";
     private static final String GET_PRODUCT_MAX_PRICE = "http://localhost:8081/query?command=max";
+    private static final String GET_PRODUCT_UNKNOWN_REQUEST = "http://localhost:8081/query?command=lol";
     private static final String GET_PRODUCTS_NUMBER = "http://localhost:8081/query?command=count";
 
     public static final List<Product> products = List.of(
@@ -98,6 +99,13 @@ public class HttpUtils {
     public static String getProductMaxPrice() {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(GET_PRODUCT_MAX_PRICE))
+                .build();
+        return getResponse(request);
+    }
+
+    public static String getProductUnknown() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(GET_PRODUCT_UNKNOWN_REQUEST))
                 .build();
         return getResponse(request);
     }

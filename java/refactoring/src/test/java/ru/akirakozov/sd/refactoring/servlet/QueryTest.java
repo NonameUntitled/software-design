@@ -7,7 +7,7 @@ import ru.akirakozov.sd.refactoring.utils.ExpectedResults;
 import ru.akirakozov.sd.refactoring.utils.HttpUtils;
 
 public class QueryTest {
-    private static final String OK_RESPONSE = "OK" + System.lineSeparator();
+    private static final String OK_RESPONSE = "OK";
 
     private void withClearDatabase(Runnable test) {
         DatabaseUtilsTest.clearDatabase();
@@ -15,7 +15,7 @@ public class QueryTest {
     }
 
     @Test
-    public void testProductAddition() {
+    public void testAddProduct() {
         withClearDatabase(() -> {
             String result = HttpUtils.addProduct(new HttpUtils.Product("New", 10L));
             Assert.assertEquals(OK_RESPONSE, result);
@@ -32,7 +32,7 @@ public class QueryTest {
         withClearDatabase(() -> {
             HttpUtils.addAllProducts();
             String result = HttpUtils.getAllProducts();
-            Assert.assertEquals(result, ExpectedResults.allProductsGroundTruth);
+            Assert.assertEquals(ExpectedResults.allProductsGroundTruth, result);
         });
     }
 
@@ -41,7 +41,7 @@ public class QueryTest {
         withClearDatabase(() -> {
             HttpUtils.addAllProducts();
             String result = HttpUtils.getAllProductsCostSum();
-            Assert.assertEquals(result, ExpectedResults.allProductsCostGroundTruth);
+            Assert.assertEquals(ExpectedResults.allProductsCostGroundTruth, result);
         });
     }
 
@@ -50,7 +50,7 @@ public class QueryTest {
         withClearDatabase(() -> {
             HttpUtils.addAllProducts();
             String result = HttpUtils.getProductMinPrice();
-            Assert.assertEquals(result, ExpectedResults.minPriceGroundTruth);
+            Assert.assertEquals(ExpectedResults.minPriceGroundTruth, result);
         });
     }
 
@@ -59,7 +59,7 @@ public class QueryTest {
         withClearDatabase(() -> {
             HttpUtils.addAllProducts();
             String result = HttpUtils.getProductMaxPrice();
-            Assert.assertEquals(result, ExpectedResults.maxPriceGroundTruth);
+            Assert.assertEquals(ExpectedResults.maxPriceGroundTruth, result);
         });
     }
 
@@ -68,7 +68,16 @@ public class QueryTest {
         withClearDatabase(() -> {
             HttpUtils.addAllProducts();
             String result = HttpUtils.getProductsNumber();
-            Assert.assertEquals(result, ExpectedResults.productsAmountGroundTruth);
+            Assert.assertEquals(ExpectedResults.productsAmountGroundTruth, result);
+        });
+    }
+
+    @Test
+    public void testUnknownCommand() {
+        withClearDatabase(() -> {
+            HttpUtils.addAllProducts();
+            String result = HttpUtils.getProductUnknown();
+            Assert.assertEquals(ExpectedResults.unknownCommandGroundTruth, result);
         });
     }
 }

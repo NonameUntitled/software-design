@@ -43,4 +43,6 @@ public class ExpectedResults {
             10\r
             </body></html>\r
             """;
+
+    public static String unknownCommandGroundTruth = "Unknown command: lol";
 }

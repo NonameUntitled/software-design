@@ -1,22 +1,14 @@
 package ru.akirakozov.sd.refactoring.servlet.queries;
 
-import ru.akirakozov.sd.refactoring.html.HtmlBuilder;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetSumPriceQuery implements Query {
+public class GetSumPriceQuery extends Query {
     @Override
-    public String processResultSet(ResultSet rs) {
-        HtmlBuilder htmlBuilder = new HtmlBuilder();
+    void processQuery(ResultSet rs) throws SQLException {
         htmlBuilder.addLine("Summary price: ");
-        try {
-            if (rs.next()) {
-                htmlBuilder.addLine(Integer.toString(rs.getInt(1)));
-            }
-        } catch (SQLException e) {
-            htmlBuilder.clear();
+        if (rs.next()) {
+            htmlBuilder.addLine(Integer.toString(rs.getInt(1)));
         }
-        return htmlBuilder.toString();
     }
 }

@@ -1,24 +1,14 @@
 package ru.akirakozov.sd.refactoring.servlet.queries;
 
-import ru.akirakozov.sd.refactoring.Product;
-import ru.akirakozov.sd.refactoring.html.HtmlBuilder;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetProductsNumberQuery implements Query {
-
+public class GetProductsNumberQuery extends Query {
     @Override
-    public String processResultSet(ResultSet rs) {
-        HtmlBuilder htmlBuilder = new HtmlBuilder();
+    void processQuery(ResultSet rs) throws SQLException {
         htmlBuilder.addLine("Number of products: ");
-        try {
-            if (rs.next()) {
-                htmlBuilder.addLine(Integer.toString(rs.getInt(1)));
-            }
-        } catch (SQLException e) {
-           throw new RuntimeException(e);
+        if (rs.next()) {
+            htmlBuilder.addLine(Integer.toString(rs.getInt(1)));
         }
-        return htmlBuilder.toString();
     }
 }
