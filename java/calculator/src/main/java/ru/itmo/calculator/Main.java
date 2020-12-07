@@ -11,29 +11,37 @@ public class Main {
             System.out.println("Usage: java Main <expression>");
             return;
         }
+
         final var tokenizer = new Tokenizer();
-        final var input = args[0];
-        for (final var c : input.toCharArray()) {
+
+        final var parserVisitor = new ParserVisitor();
+        final var printVisitor = new PrintVisitor();
+        final var calcVisitor = new CalcVisitor();
+
+        final var expression = args[0];
+
+        for (final var c : expression.toCharArray()) {
             tokenizer.handle(c);
         }
 
         final var tokens = tokenizer.getResult();
-        final var parserVisitor = new ParserVisitor();
+
         for (final var t : tokens) {
             t.visit(parserVisitor);
         }
 
-        final var rpnTokens = parserVisitor.getResult();
-        final var printVisitor = new PrintVisitor();
-        for (final var t : rpnTokens) {
+        final var processedTokens = parserVisitor.getResult();
+
+        for (final var t : processedTokens) {
             t.visit(printVisitor);
         }
+
         System.out.println(printVisitor.getResult());
 
-        final var calcVisitor = new CalcVisitor();
-        for (final var t : rpnTokens) {
+        for (final var t : processedTokens) {
             t.visit(calcVisitor);
         }
+
         System.out.println(calcVisitor.getResult());
     }
 }

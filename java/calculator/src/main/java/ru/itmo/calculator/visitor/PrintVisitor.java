@@ -15,7 +15,7 @@ public class PrintVisitor implements TokenVisitor {
 
     @Override
     public void visit(final Bracket token) {
-        builder.append(token.getBrace());
+        builder.append(token.getBracket());
         builder.append(' ');
     }
 

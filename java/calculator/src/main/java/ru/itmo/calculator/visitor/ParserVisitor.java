@@ -28,7 +28,7 @@ public class ParserVisitor implements TokenVisitor {
 
     @Override
     public void visit(final Bracket token) {
-        if (token.getBrace() == '(') {
+        if (token.getBracket() == '(') {
             operations.push(token);
         } else {
             while (true) {
@@ -36,7 +36,7 @@ public class ParserVisitor implements TokenVisitor {
                     throw new InvalidBracketsMatchingException();
                 }
                 final var current = operations.pop();
-                if (current instanceof Bracket && ((Bracket) current).getBrace() == '(') {
+                if (current instanceof Bracket && ((Bracket) current).getBracket() == '(') {
                     break;
                 } else {
                     tokens.add(current);
